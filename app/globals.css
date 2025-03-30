@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+.bg-boss-gradient {
+  background: linear-gradient(
+    300.81deg,
+    #0b246f 29.82%,
+    #292e82 41.94%,
+    #353075 51.94%,
+    #302e6c 90.29%
+  );
+}
+.bg-dark-gradient {
+  background: radial-gradient(
+    circle at center,
+    #02034c,      /* Dark blue */
+    #000000 60%,  /* Dark red/purple mix */
+    #02034c 100%      /* Dark blue */
+  );
+}
+
+
+
+.dark-gradient {
+  background: linear-gradient(
+    300.81deg,
+    #010513 29.82%,
+    #292771 100%
+  );
+};
+
+/* globals.css */
+.react-international-phone-flag-emoji {
+  font-size: 1.2em !important;
+}
+
+.react-international-phone-country-selector-button {
+  padding: 8px !important;
+  border-right: 1px solid #444 !important;
+}
+
+.react-international-phone-input {
+  background: #1a1a1a !important;
+  color: white !important;
+  border: none !important;
+  padding: 8px !important;
+}
+
+.poppins {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
