@@ -8,8 +8,9 @@ import { RegisterSchema } from "@/schemas";
 import { CardWrapper } from "./card-wrapper";
 import { PhoneInput } from "react-international-phone";
 import { useRouter } from "next/navigation";
+import "react-international-phone/style.css";
+import countryList from "country-list";
 
-import "react-international-phone/style.css"
 import {
   Form,
   FormField,
@@ -29,6 +30,9 @@ export const RegisterForm: React.FC = () => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
+  // Fetch country list from the "country-list" library.
+  const countries = countryList.getData();
+
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -37,8 +41,10 @@ export const RegisterForm: React.FC = () => {
       phone: "",
       country: "",
       metamask: "",
+      autotrade: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
@@ -57,7 +63,7 @@ export const RegisterForm: React.FC = () => {
           setSuccess(data.success);
           setTimeout(() => {
             router.push("/auth/login");
-      }, 2000);
+          }, 2000);
         }
       } catch (err) {
         setError("An unexpected error occurred. Please try again later.");
@@ -75,6 +81,7 @@ export const RegisterForm: React.FC = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-4">
+              {/* First Name */}
               <FormField
                 control={form.control}
                 name="firstname"
@@ -94,6 +101,7 @@ export const RegisterForm: React.FC = () => {
                 )}
               />
 
+              {/* Last Name */}
               <FormField
                 control={form.control}
                 name="lastname"
@@ -113,46 +121,29 @@ export const RegisterForm: React.FC = () => {
                 )}
               />
 
-               <FormField
-                 control={form.control}
-                 name="phone"
-                 render={({ field }) => (
-                   <FormItem>
-                     <FormLabel>Phone Number</FormLabel>
-                     <FormControl>
-                       <PhoneInput
-                         {...field}
-                         defaultCountry="ng"
-                         inputClassName="bg-gray-900 text-white w-full rounded-md p-2"
-                         countrySelectorStyleProps={{
-                           buttonClassName: "bg-gray-900 text-white rounded-l-md p-2",
-                           dropdownStyleProps: {
-                             className: "bg-gray-900 text-white"
-                           }
-                         }}
-                         inputStyle={{ width: "100%" }}
-                         disabled={isPending}
-                         placeholder="812 345 6789"
-                         onChange={(phone) => field.onChange(phone)}
-                       />
-                     </FormControl>
-                     <FormMessage />
-                   </FormItem>
-                 )}
-               />
-
+              {/* Phone Number */}
               <FormField
                 control={form.control}
-                name="country"
+                name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Country</FormLabel>
+                    <FormLabel>Phone Number</FormLabel>
                     <FormControl>
-                      <input
+                      <PhoneInput
                         {...field}
+                        defaultCountry="ng"
+                        inputClassName="bg-gray-900 text-white w-full rounded-md p-2"
+                        countrySelectorStyleProps={{
+                          buttonClassName:
+                            "bg-gray-900 text-white rounded-l-md p-2",
+                          dropdownStyleProps: {
+                            className: "bg-gray-900 text-white",
+                          },
+                        }}
+                        inputStyle={{ width: "100%" }}
                         disabled={isPending}
-                        placeholder="Country"
-                        className="bg-gray-900 w-full rounded-md p-2"
+                        placeholder="812 345 6789"
+                        onChange={(phone) => field.onChange(phone)}
                       />
                     </FormControl>
                     <FormMessage />
@@ -160,6 +151,34 @@ export const RegisterForm: React.FC = () => {
                 )}
               />
 
+              {/* Country List Dropdown */}
+              <FormField
+                control={form.control}
+                name="country"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Country</FormLabel>
+                    <FormControl>
+                      <select
+                        {...field}
+                        disabled={isPending}
+                        className="bg-gray-900 text-white w-full rounded-md p-2"
+                        style={{ maxHeight: "200px", overflowY: "auto" }}
+                      >
+                        <option value="">Select a country</option>
+                        {countries.map((country) => (
+                          <option key={country.code} value={country.name}>
+                            {country.name}
+                          </option>
+                        ))}
+                      </select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Metamask Wallet Address */}
               <FormField
                 control={form.control}
                 name="metamask"
@@ -179,6 +198,27 @@ export const RegisterForm: React.FC = () => {
                 )}
               />
 
+              {/* AutoTrade */}
+              <FormField
+                control={form.control}
+                name="autotrade"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>AutoTrade</FormLabel>
+                    <FormControl>
+                      <input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="BrainStorm"
+                        className="bg-gray-900 w-full rounded-md p-2"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Email */}
               <FormField
                 control={form.control}
                 name="email"
@@ -199,6 +239,7 @@ export const RegisterForm: React.FC = () => {
                 )}
               />
 
+              {/* Password */}
               <FormField
                 control={form.control}
                 name="password"
@@ -210,6 +251,27 @@ export const RegisterForm: React.FC = () => {
                         {...field}
                         disabled={isPending}
                         placeholder="********"
+                        type="password"
+                        className="bg-gray-900 w-full rounded-md p-2"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Confirm Password */}
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Confirm Password</FormLabel>
+                    <FormControl>
+                      <input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="Confirm Password"
                         type="password"
                         className="bg-gray-900 w-full rounded-md p-2"
                       />

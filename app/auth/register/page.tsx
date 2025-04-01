@@ -9,7 +9,7 @@ export default function RegisterPage() {
       {/* Left side: Fixed logo and title */}
       <div className="fixed left-0 top-0 h-full w-1/2 flex flex-col items-center justify-center p-8">
         <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          <br /> Amazing Trading
+          <br /> Amazing Trading 
         </h1>
         <img src="/logo.png" alt="Logo" width="350" height="60" />
       </div>

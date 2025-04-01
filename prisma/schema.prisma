@@ -7,6 +7,11 @@ datasource db {
   url      = env("MONGO_URI")
 }
 
+enum UserRole {
+  ADMIN
+  USER
+}
+
 model User {
   id             String          @id @default(auto()) @map("_id") @db.ObjectId
   firstname      String
@@ -14,10 +19,12 @@ model User {
   phone          String
   country        String
   metamask       String
+  autotrade      String
   email          String         @unique
   emailVerified  DateTime?
   image          String?
   password       String
+  role           UserRole @default(USER)
   accounts       Account[]
  
   createdAt DateTime @default(now())
@@ -44,4 +51,13 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
   @@unique([provider, providerAccountId])
+}
+
+model VerificationToken {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  email   String
+  token   String
+  expires DateTime
+
+  @@unique([email, token])
 }

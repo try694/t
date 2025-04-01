@@ -35,18 +35,57 @@
 /* globals.css */
 .react-international-phone-flag-emoji {
   font-size: 1.2em !important;
+  background-color: #374151 !important; /* gray-700 */
+  color: #374151 !important; /* light gray-200 */
 }
 
 .react-international-phone-country-selector-button {
   padding: 8px !important;
-  border-right: 1px solid #444 !important;
+  border-right: 1px solid #4b5563 !important; /* gray-600 */
+  background-color: #374151 !important; /* gray-700 */
+  color: #374151 !important; /* light gray-200 */
 }
 
 .react-international-phone-input {
-  background: #1a1a1a !important;
-  color: white !important;
+  background: #374151 !important; /* gray-700 */
+  color: #e5e7eb !important; /* light gray-200 */
   border: none !important;
   padding: 8px !important;
+}
+
+/* Dropdown container */
+.react-international-phone-country-selector-dropdown {
+  background-color: #374151 !important; /* gray-700 */
+  border: 1px solid #4b5563 !important;
+   /* gray-600 */
+   color: #e5e7eb !important; /* light gray-200 */
+
+}
+
+/* Dropdown items */
+.react-international-phone-country-selector-dropdown-item {
+  background-color: #374151 !important; /* gray-700 */
+  color: #374151 !important; /* light gray-200 */
+}
+
+/* Hover state */
+.react-international-phone-country-selector-dropdown-item:hover {
+  background-color: #4b5563 !important; /* gray-600 */
+  color: #fff !important; /* pure white */
+}
+
+/* Active/focused state */
+.react-international-phone-country-selector-dropdown-item:focus,
+.react-international-phone-country-selector-dropdown-item--active {
+  background-color: #6b7280 !important; /* gray-500 */
+  color: #fff !important;
+}
+
+/* Search input in dropdown */
+.react-international-phone-country-selector-search-input {
+  background: #1f2937 !important; /* gray-800 */
+  color: #f9fafb !important; /* gray-50 */
+  border-color: #4b5563 !important; /* gray-600 */
 }
 
 .poppins {
