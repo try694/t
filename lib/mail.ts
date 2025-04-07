@@ -3,7 +3,7 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendPasswordResetEmail = async (
-    email: string,
+    email: string, 
     token: string
 ) => {
     const resetLink = `http://t-8iu5.vercel.app/auth/new-password?token=${token}`;
