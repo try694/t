@@ -59,7 +59,7 @@ export const sendVerificationEmail = async (
                     Verify Email
                 </a>
                 <p style="margin-top: 30px; color: #6b7280;">
-                    If you didn't request this email, you can safely ignore it.
+                    If you didn't request this email, you can safely ignore this.
                 </p>
             </div>
         `
