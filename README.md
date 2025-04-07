@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+"use client";
 
-## Getting Started
+import React from "react";
 
-First, run the development server:
+export default function OverviewPage() {
+  return (
+    <div className="space-y-6 px-4 py-6 poppins-semibold">
+      {/* TRADING SETTINGS */}
+      <section className="border border-neutral-700 rounded p-4">
+        <h2 className="text-lg font-semibold text-green-400 mb-3">
+          Trading Settings
+        </h2>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm text-gray-300 mb-1">
+              Minimum Profit Threshold (%)
+            </label>
+            <input
+              type="number"
+              className="w-full bg-transparent border border-neutral-700 rounded px-2 py-2 text-sm focus:outline-none"
+              placeholder="0.01"
+            />
+          </div>
+          <div>
+            <label className="block text-sm text-gray-300 mb-1">
+              Trade Amount (ETH)
+            </label>
+            <input
+              type="number"
+              className="w-full bg-transparent border border-neutral-700 rounded px-2 py-2 text-sm focus:outline-none"
+              placeholder="0.1"
+            />
+          </div>
+        </div>
+      </section>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+      {/* YOUR BALANCES */}
+      <section className="border border-neutral-700 rounded p-4">
+        <h2 className="text-lg font-semibold text-green-400 mb-3">
+          Your Balances
+        </h2>
+        <div className="grid grid-cols-4 gap-4">
+          {/* Example Balance Card */}
+          <div className="bg-transparent border border-neutral-700 rounded p-3 text-center">
+            <p className="text-xs text-gray-400">ETH</p>
+            <p className="text-lg font-semibold text-green-400">9999.9976</p>
+          </div>
+          <div className="bg-transparent border border-neutral-700 rounded p-3 text-center">
+            <p className="text-xs text-gray-400">WETH</p>
+            <p className="text-lg font-semibold text-green-400">0.0000</p>
+          </div>
+          <div className="bg-transparent border border-neutral-700 rounded p-3 text-center">
+            <p className="text-xs text-gray-400">USDT</p>
+            <p className="text-lg font-semibold text-green-400">0.0000</p>
+          </div>
+          <div className="bg-transparent border border-neutral-700 rounded p-3 text-center">
+            <p className="text-xs text-gray-400">USDT</p>
+            <p className="text-lg font-semibold text-green-400">0.0000</p>
+          </div>
+        </div>
+      </section>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+      {/* POTENTIAL TRADES */}
+      <section className="border border-neutral-700 rounded p-4">
+        <h2 className="text-lg font-semibold text-green-400 mb-3">
+          Potential Trades
+        </h2>
+        <div className="space-y-3">
+          {/* Trade Row 1 */}
+          <div className="flex items-center justify-between bg-transparent border border-neutral-700 rounded p-3">
+            <div className="text-sm">
+              <p className="text-green-400">
+                DAI/USDT (0.2% potential profit)
+              </p>
+              <p className="text-gray-400 text-xs">
+                Buy from: Uniswap V3 $2860.74 | Sell on: SushiSwap $2817.21
+              </p>
+            </div>
+            <button className="bg-gradient-to-r from-blue-300 to-blue-500 hover:from-blue-400 hover:to-blue-600 text-black font-semibold py-1 px-3 rounded text-sm transition">
+              Execute Trade
+            </button>
+          </div>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+          {/* Trade Row 2 */}
+          <div className="flex items-center justify-between bg-transparent border border-neutral-700 rounded p-3">
+            <div className="text-sm">
+              <p className="text-green-400">
+                DAI/USDT (0.2% potential profit)
+              </p>
+              <p className="text-gray-400 text-xs">
+                Buy from: Quickswap V2 $2860.74 | Sell on: SushiSwap $2817.21
+              </p>
+            </div>
+            <button className="bg-gradient-to-r from-blue-300 to-blue-500 hover:from-blue-400 hover:to-blue-600 text-black font-semibold py-1 px-3 rounded text-sm transition">
+              Execute Trade
+            </button>
+          </div>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+          {/* Trade Row 3 */}
+          <div className="flex items-center justify-between bg-transparent border border-neutral-700 rounded p-3">
+            <div className="text-sm">
+              <p className="text-green-400">
+                DAI/USDT (0.2% potential profit)
+              </p>
+              <p className="text-gray-400 text-xs">
+                Buy from: Quickswap V2 $2860.74 | Sell on: SushiSwap $2817.21
+              </p>
+            </div>
+            <button className="bg-gradient-to-r from-blue-300 to-blue-500 hover:from-blue-400 hover:to-blue-600 text-black font-semibold py-1 px-3 rounded text-sm transition">
+              Execute Trade
+            </button>
+          </div>
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+          {/* Trade Row 4 */}
+          <div className="flex items-center justify-between bg-transparent border border-neutral-700 rounded p-3">
+            <div className="text-sm">
+              <p className="text-green-400">
+                DAI/USDT (0.2% potential profit)
+              </p>
+              <p className="text-gray-400 text-xs">
+                Buy from: Quickswap V2 $2860.74 | Sell on: SushiSwap $2817.21
+              </p>
+            </div>
+            <button className="bg-gradient-to-r from-blue-300 to-blue-500 hover:from-blue-400 hover:to-blue-600 text-black font-semibold py-1 px-3 rounded text-sm transition">
+              Execute Trade
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

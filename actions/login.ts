@@ -5,8 +5,9 @@ import { LoginSchema } from "@/schemas";
 import { signIn } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { AuthError } from "next-auth";
-
-// Define a return type for clarity
+import { generateVerificationToken } from "@/lib/tokens";
+import { getUserByEmail } from "@/data/user";
+import { sendVerificationEmail } from "@/lib/mail";
 type LoginResponse = { error?: string; success?: string };
 
 export const login = async (values: z.infer<typeof LoginSchema>): Promise<LoginResponse> => {
@@ -17,13 +18,31 @@ export const login = async (values: z.infer<typeof LoginSchema>): Promise<LoginR
   }
 
   const { email, password } = validatedFields.data;
+
+  const existingUser = await getUserByEmail(email);
+
+  if (!existingUser || !existingUser.email || !existingUser.password) {
+    return { error: "Email doesn't exist!" };
+  }
+
+  if(!existingUser.emailVerified) {
+    const verificationToken = await generateVerificationToken(
+      existingUser.email,
+    );
+
+    await sendVerificationEmail(
+      verificationToken.email,
+      verificationToken.token,
+    );
+  }
+
+  //   
   try {
     await signIn("credentials", {
       email,
       password,
       redirectTo: DEFAULT_LOGIN_REDIRECT,
     });
-    // Even though signIn might redirect automatically, return a success message
     return { success: "Login successful" };
   } catch (error) {
     if (error instanceof AuthError) {

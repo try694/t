@@ -31,10 +31,6 @@ export const CardWrapper = ({
           <Social />
         </CardFooter>
       )}
-<div className="flex flex-col items-center">
-  <div className="text-sm text-neutral-400">or</div>
-  <div className="w-full h-px bg-neutral-600 mt-1" />
-</div>
       <CardContent>
         {children}
       </CardContent>

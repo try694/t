@@ -11,17 +11,28 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  pages: {
+    signIn: "/auth/login",
+    error: "/auth/error",
+  },
+  events: {
+    async linkAccount({ user }) {
+      await db.user.update({
+        where: { id: user.id },
+        data: { emailVerified: new Date()}
+      })
+    }
+  },
   callbacks: {
-    // async signIn({ user }) {
-    //   // Ensure user.id is defined
-    //   if (!user.id) return false;
+    async signIn({ user }) {
+      // Ensure user.id is defined
+      if (!user.id) return false;
       
-    //   const existingUser = await getUserById(user.id);
-    //   if (!existingUser || !existingUser.emailVerified) {
-    //     return false;
-    //   }
-    //   return true;
-    // },
+      const existingUser = await getUserById(user.id);
+      if (!existingUser?.emailVerified) return false;
+       
+      return true;
+    },
     async session({ token, session }) {
       // If token has a subject and session user exists, assign the id
       if (token.sub && session.user) {
