@@ -86,7 +86,7 @@ const ApprovedUsersComp = () => {
   };
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-hidden">
       <table className="min-w-full table-fixed rounded-lg shadow-lg bg-black-gradient border border-gray-700">
         <thead>
           <tr className="bg-gray-900 text-gray-400 border-b border-gray-700">
