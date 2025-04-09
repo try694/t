@@ -37,6 +37,10 @@ export const approveUserWithData = async (
   }
 
   try {
+    // Convert the "Unlimited" string to null to satisfy the Prisma Float field.
+    const allowedTradingAmountToValue =
+      allowedTradingAmountTo === "Unlimited" ? null : allowedTradingAmountTo;
+      
     // Update the user's record with the admin-provided data and mark as approved.
     await db.user.update({
       where: { id: userId },
@@ -45,7 +49,7 @@ export const approveUserWithData = async (
         groupId,
         whitelisted,
         allowedTradingAmountFrom,
-        allowedTradingAmountTo,
+        allowedTradingAmountTo: allowedTradingAmountToValue,
         adminFee,
         userProfit,
         introducerFee,
@@ -59,6 +63,7 @@ export const approveUserWithData = async (
     return { error: "Error approving user" };
   }
 };
+
 
 export const deleteUserById = async (userId: string) => {
   try {

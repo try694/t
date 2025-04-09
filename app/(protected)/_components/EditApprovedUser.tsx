@@ -1,15 +1,15 @@
 "use client";
 
+import * as z from "zod";
+
 import React, { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { KeyedMutator } from "swr";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { mutate } from "swr";
-
 import { EditApprovedUserSchema } from "@/schemas";
 import { updateApprovedUser } from "@/actions/waitinglist-action";
 import { IUser } from "@/interface";
-
+import GROUP_PRESETS from "@/const/grouppreset";
 import {
   Form,
   FormField,
@@ -18,15 +18,18 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type EditApprovedUserSchemaType = z.infer<typeof EditApprovedUserSchema>;
 
 interface EditApprovedUserProps {
   user: IUser;
   onClose: () => void;
+  mutate: KeyedMutator<IUser[]>;
 }
 
-const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) => {
+const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, mutate }) => {
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
 
@@ -51,6 +54,21 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
     },
   });
 
+  // Custom handler to auto-populate related fields when the group is changed.
+  const handleGroupChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+    const groupId = e.target.value;
+    form.setValue("groupId", groupId);
+    if (GROUP_PRESETS[groupId]) {
+      const preset = GROUP_PRESETS[groupId];
+      form.setValue("adminFee", preset.adminFee);
+      form.setValue("userProfit", preset.userProfit);
+      form.setValue("introducerFee", preset.introducerFee);
+      form.setValue("allowedTradingAmountFrom", preset.allowedTradingAmountFrom);
+      // Cast the preset value for allowedTradingAmountTo to number | "Unlimited"
+      form.setValue("allowedTradingAmountTo", preset.allowedTradingAmountTo as number | "Unlimited");
+    }
+  };
+
   const onSubmit = (values: EditApprovedUserSchemaType) => {
     setError("");
     startTransition(async () => {
@@ -58,14 +76,16 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
         const response = await updateApprovedUser(user.id, values);
         if (response?.error) {
           setError(response.error);
+          toast.error(response.error);
         } else {
-          onClose(); // Close the modal on success
-          // Invalidate and re-fetch the approved users list using SWR
-          mutate("/approveduser");
+          toast.success("User updated successfully!");
+          onClose();
+          mutate();
         }
       } catch (err) {
         console.error("Update error:", err);
         setError("An unexpected error occurred.");
+        toast.error("An unexpected error occurred.");
       }
     });
   };
@@ -76,9 +96,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
         <h2 className="text-xl text-white font-bold mb-4">
           Edit User: {user.firstname} ({user.email})
         </h2>
-
         <Form {...form}>
-          {/* Remove the onSubmit from the form tag */}
           <form className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               {/* First Name */}
@@ -95,7 +113,6 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   </FormItem>
                 )}
               />
-
               {/* Last Name */}
               <FormField
                 control={form.control}
@@ -110,7 +127,6 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   </FormItem>
                 )}
               />
-
               {/* Phone */}
               <FormField
                 control={form.control}
@@ -125,7 +141,6 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   </FormItem>
                 )}
               />
-
               {/* Country */}
               <FormField
                 control={form.control}
@@ -140,7 +155,6 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   </FormItem>
                 )}
               />
-
               {/* Metamask */}
               <FormField
                 control={form.control}
@@ -155,7 +169,6 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   </FormItem>
                 )}
               />
-
               {/* AutoTrade */}
               <FormField
                 control={form.control}
@@ -170,7 +183,6 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   </FormItem>
                 )}
               />
-
               {/* Email */}
               <FormField
                 control={form.control}
@@ -185,8 +197,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   </FormItem>
                 )}
               />
-
-              {/* Approved */}
+              {/* Approved Checkbox */}
               <FormField
                 control={form.control}
                 name="approved"
@@ -202,8 +213,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   </FormItem>
                 )}
               />
-
-              {/* Whitelisted */}
+              {/* Whitelisted Checkbox */}
               <FormField
                 control={form.control}
                 name="whitelisted"
@@ -219,8 +229,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   </FormItem>
                 )}
               />
-
-              {/* Group ID */}
+              {/* Group Select with auto-populate */}
               <FormField
                 control={form.control}
                 name="groupId"
@@ -228,26 +237,34 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   <FormItem>
                     <FormLabel>Group</FormLabel>
                     <FormControl>
-                      <select {...field} className="bg-gray-800 text-white w-full p-2 rounded">
+                      <select
+                        {...field}
+                        onChange={(e) => {
+                          handleGroupChange(e);
+                        }}
+                        className="bg-gray-800 text-white w-full p-2 rounded"
+                      >
                         <option value="">Select group</option>
                         <option value="1">VIP</option>
-                        <option value="2">TRADER 60</option>
-                        <option value="3">TRADER 70</option>
-                        <option value="4">TRADER 80</option>
-                        <option value="5">TRADER 90</option>
-                        <option value="6">TRADER 95</option>
-                        <option value="7">SPONSOR</option>
-                        <option value="8">ANTS</option>
-                        <option value="10">HIGH</option>
-                        <option value="11">MEDIUM</option>
-                        <option value="12">LOW</option>
+                        <option value="2">TRADER 50</option>
+                        <option value="3">TRADER 40</option>
+                        <option value="4">TRADER 30</option>
+                        <option value="5">TRADER 25</option>
+                        <option value="6">TRADER 20</option>
+                        <option value="7">TRADER 15</option>
+                        <option value="8">TRADER 10</option>
+                        <option value="9">TRADER 5</option>
+                        <option value="10">ROBOTS</option>
+                        <option value="11">WORKERS</option>
+                        <option value="12">HIGH</option>
+                        <option value="13">MEDIUM</option>
+                        <option value="14">LOW</option>
                       </select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
               {/* Allowed Trading Amount From */}
               <FormField
                 control={form.control}
@@ -256,13 +273,16 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   <FormItem>
                     <FormLabel>Allowed Trading Amount From</FormLabel>
                     <FormControl>
-                      <input type="number" {...field} className="bg-gray-800 text-white w-full p-2 rounded" />
+                      <input 
+                        type="number" 
+                        {...field} 
+                        className="bg-gray-800 text-white w-full p-2 rounded" 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
               {/* Allowed Trading Amount To */}
               <FormField
                 control={form.control}
@@ -271,13 +291,17 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   <FormItem>
                     <FormLabel>Allowed Trading Amount To</FormLabel>
                     <FormControl>
-                      <input type="number" {...field} className="bg-gray-800 text-white w-full p-2 rounded" />
+                      {/* Using type "text" so that it can handle numbers or "Unlimited" */}
+                      <input 
+                        type="text" 
+                        {...field} 
+                        className="bg-gray-800 text-white w-full p-2 rounded" 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
               {/* Admin Fee */}
               <FormField
                 control={form.control}
@@ -286,13 +310,16 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   <FormItem>
                     <FormLabel>Admin Fee</FormLabel>
                     <FormControl>
-                      <input type="number" {...field} className="bg-gray-800 text-white w-full p-2 rounded" />
+                      <input 
+                        type="number" 
+                        {...field} 
+                        className="bg-gray-800 text-white w-full p-2 rounded" 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
               {/* User Profit */}
               <FormField
                 control={form.control}
@@ -301,13 +328,16 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   <FormItem>
                     <FormLabel>User Profit (%)</FormLabel>
                     <FormControl>
-                      <input type="number" {...field} className="bg-gray-800 text-white w-full p-2 rounded" />
+                      <input 
+                        type="number" 
+                        {...field} 
+                        className="bg-gray-800 text-white w-full p-2 rounded" 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
               {/* Introducer Fee */}
               <FormField
                 control={form.control}
@@ -316,7 +346,11 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
                   <FormItem>
                     <FormLabel>Introducer Fee (%)</FormLabel>
                     <FormControl>
-                      <input type="number" {...field} className="bg-gray-800 text-white w-full p-2 rounded" />
+                      <input 
+                        type="number" 
+                        {...field} 
+                        className="bg-gray-800 text-white w-full p-2 rounded" 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -334,7 +368,6 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose }) =>
               >
                 Cancel
               </button>
-              {/* Changed the Confirm button to use an explicit onClick */}
               <button
                 type="button"
                 onClick={form.handleSubmit(onSubmit)}

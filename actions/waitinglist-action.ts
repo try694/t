@@ -41,16 +41,12 @@ export const updateApprovedUser = async (
   userId: string,
   values: z.infer<typeof EditApprovedUserSchema>
 ) => {
-  // Validate input
   const parsed = EditApprovedUserSchema.safeParse(values);
   if (!parsed.success) {
-    const errorMessages = parsed.error.errors
-      .map((err) => err.message)
-      .join(", ");
+    const errorMessages = parsed.error.errors.map((err) => err.message).join(", ");
     return { error: errorMessages || "Invalid fields!" };
   }
-
-  // Destructure the validated data
+  
   const {
     firstname,
     lastname,
@@ -69,13 +65,16 @@ export const updateApprovedUser = async (
     introducerFee,
   } = parsed.data;
 
-  // Check if user exists
   const existingUser = await getUserById(userId);
   if (!existingUser) {
     return { error: "User not found" };
   }
 
   try {
+    // Convert allowedTradingAmountTo: if "Unlimited", then set to null.
+    const allowedTradingAmountToValue: number | null =
+      allowedTradingAmountTo === "Unlimited" ? null : Number(allowedTradingAmountTo);
+
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: {
@@ -90,13 +89,12 @@ export const updateApprovedUser = async (
         whitelisted,
         groupId,
         allowedTradingAmountFrom,
-        allowedTradingAmountTo,
+        allowedTradingAmountTo: allowedTradingAmountToValue,
         adminFee,
         userProfit,
         introducerFee,
       },
     });
-    // Revalidate the approved users route (adjust the path as needed)
     revalidatePath("/approveduser");
     return { success: "User updated successfully!", user: updatedUser };
   } catch (error) {

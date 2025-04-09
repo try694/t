@@ -22,6 +22,15 @@
   );
 }
 
+.bg-black-blue {
+  background: radial-gradient(
+    circle at center,
+    #000000,       /* Start with pure black */
+    #0a0f3f 35%,   /* Transition into a very dark blue */
+    #010e25 70%,   /* A deep blue to add dimension */
+    #000800 100%   /* Deepening into an almost black blue at the edges */
+  );
+}
 
 
 .dark-gradient {

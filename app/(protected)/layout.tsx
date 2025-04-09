@@ -1,7 +1,5 @@
 // src/app/dashboard/layout.tsx
-
 import { Navbar } from "./_components/navbar";
-
 
 export default function DashboardLayout({
   children,
@@ -9,12 +7,16 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex bg-dark-gradient text-white">
+    <div className="min-h-screen flex bg-gray-900 text-white">
       {/* Left sidebar */}
-       <Navbar />
+      <Navbar />
+
       {/* Main content area */}
-      <main className="flex-1 p-4">
-        {children}
+      <main className="flex-1 p-4 overflow-hidden">
+        {/* Container that can scroll horizontally/vertically if needed */}
+        <div className="w-full h-full overflow-auto">
+          {children}
+        </div>
       </main>
     </div>
   );
