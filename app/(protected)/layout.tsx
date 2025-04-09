@@ -14,7 +14,7 @@ export default function DashboardLayout({
       {/* Main content area */}
       <main className="flex-1 p-4 overflow-hidden">
         {/* Container that can scroll horizontally/vertically if needed */}
-        <div className="w-full h-full overflow-auto">
+        <div className="w-full h-full">
           {children}
         </div>
       </main>
