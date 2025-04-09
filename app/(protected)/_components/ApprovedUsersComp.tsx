@@ -90,32 +90,32 @@ const ApprovedUsersComp = () => {
       <table className="min-w-full table-fixed rounded-lg shadow-lg bg-black-gradient border border-gray-700">
         <thead>
           <tr className="bg-gray-900 text-gray-400 border-b border-gray-700">
-            <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">First Name</th>
-            <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Last Name</th>
-            <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Phone</th>
-            <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Country</th>
-            <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Metamask Acc</th>
-            <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Email</th>
-            <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Group</th>
-            <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Admin Fee</th>
-            <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Introducer Fee</th>
-            <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Action</th>
+            <th className="p-3 text-left max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">First Name</th>
+            <th className="p-3 text-left max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">Last Name</th>
+            <th className="p-3 text-left max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">Phone</th>
+            <th className="p-3 text-left max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">Country</th>
+            <th className="p-3 text-left max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">Metamask Acc</th>
+            <th className="p-3 text-left max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">Email</th>
+            <th className="p-3 text-left max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">Group</th>
+            <th className="p-3 text-left max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">Admin Fee</th>
+            <th className="p-3 text-left max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">Introducer Fee</th>
+            <th className="p-3 text-left max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">Action</th>
           </tr>
         </thead>
         <tbody>
           {users?.map((user) => (
             <tr key={user.id} className="border-b border-gray-700 hover:bg-gray-800">
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.firstname}</td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.lastname}</td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.phone}</td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.country}</td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.metamask}</td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.email}</td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.groupId || "-"}</td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">
+              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.firstname}</td>
+              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.lastname}</td>
+              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.phone}</td>
+              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.country}</td>
+              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.metamask}</td>
+              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.email}</td>
+              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.groupId || "-"}</td>
+              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">
                 {user.adminFee != null ? user.adminFee : "-"}
               </td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">
+              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">
                 {user.introducerFee != null ? user.introducerFee : "-"}
               </td>
               <td className="p-3">
