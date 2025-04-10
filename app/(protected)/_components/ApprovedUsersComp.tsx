@@ -105,35 +105,37 @@ const ApprovedUsersComp = () => {
         <tbody>
           {users?.map((user) => (
             <tr key={user.id} className="border-b border-gray-700 hover:bg-gray-800">
-              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.firstname}</td>
-              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.lastname}</td>
-              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.phone}</td>
-              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.country}</td>
-              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.metamask}</td>
-              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.email}</td>
-              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.groupId || "-"}</td>
-              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">
+              <td className="p-3 text-gray-200 max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.firstname}</td>
+              <td className="p-3 text-gray-200 max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.lastname}</td>
+              <td className="p-3 text-gray-200 max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.phone}</td>
+              <td className="p-3 text-gray-200 max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.country}</td>
+              <td className="p-3 text-gray-200 max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.metamask}</td>
+              <td className="p-3 text-gray-200 max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.email}</td>
+              <td className="p-3 text-gray-200 max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.groupId || "-"}</td>
+              <td className="p-3 text-gray-200 max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">
                 {user.adminFee != null ? user.adminFee : "-"}
               </td>
-              <td className="p-3 text-white max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">
+              <td className="p-3 text-gray-200 max-w-[12ch] overflow-hidden whitespace-nowrap text-ellipsis">
                 {user.introducerFee != null ? user.introducerFee : "-"}
               </td>
               <td className="p-3">
                 <div className="flex space-x-2">
-                  <button
-                    onClick={() => openEditPopup(user)}
-                    className="flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                  >
-                    <FaEdit className="h-5 w-5 mr-2" />
-                    <span className="hidden sm:inline">Edit</span>
-                  </button>
-                  <button
-                    onClick={() => handleDelete(user.id)}
-                    className="flex items-center px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-                  >
-                    <FaTrash className="h-5 w-5 mr-2" />
-                    <span className="hidden sm:inline">Delete</span>
-                  </button>
+                <div className="flex space-x-2">
+  <button
+    onClick={() => openEditPopup(user)}
+    className="p-2 text-blue-500 rounded-full transition-colors duration-200"
+    aria-label="Edit"
+  >
+    <FaEdit className="h-5 w-5" />
+  </button>
+  <button
+    onClick={() => handleDelete(user.id)}
+    className="p-2 text-red-500 rounded-full transition-colors duration-200"
+    aria-label="Delete"
+  >
+    <FaTrash className="h-4 w-4" />
+  </button>
+</div>
                 </div>
               </td>
             </tr>

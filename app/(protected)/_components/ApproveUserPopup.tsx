@@ -74,7 +74,7 @@ const ApproveUserPopup: React.FC<ApproveUserPopupProps> = ({ user, onClose }) =>
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-gray-900 p-6 rounded-md w-full max-w-md">
-        <h2 className="text-xl text-gray-300 font-bold mb-4">
+        <h2 className="text-xl text-gray-400 font-bold mb-4">
           Approve User: {user.firstname} ({user.email})
         </h2>
         <Form {...form}>
@@ -85,7 +85,7 @@ const ApproveUserPopup: React.FC<ApproveUserPopupProps> = ({ user, onClose }) =>
               name="groupId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-yellow-600">Group</FormLabel>
+                  <FormLabel className="text-gray-400">Group</FormLabel>
                   <FormControl>
                     <select
                       {...field}
@@ -129,7 +129,7 @@ const ApproveUserPopup: React.FC<ApproveUserPopupProps> = ({ user, onClose }) =>
                     onBlur={field.onBlur}
                     className="mr-2"
                   />
-                  <FormLabel className="m-0 text-yellow-600">Whitelisted</FormLabel>
+                  <FormLabel className="m-0 text-gray-400">Whitelisted</FormLabel>
                 </FormItem>
               )}
             />
@@ -140,7 +140,7 @@ const ApproveUserPopup: React.FC<ApproveUserPopupProps> = ({ user, onClose }) =>
               name="allowedTradingAmountFrom"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-yellow-600">Allowed Trading Amount From</FormLabel>
+                  <FormLabel className="text-gray-400">Allowed Trading Amount From</FormLabel>
                   <FormControl>
                     <input
                       type="number"
@@ -162,7 +162,7 @@ const ApproveUserPopup: React.FC<ApproveUserPopupProps> = ({ user, onClose }) =>
               name="allowedTradingAmountTo"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-yellow-600">Allowed Trading Amount To</FormLabel>
+                  <FormLabel className="text-gray-400">Allowed Trading Amount To</FormLabel>
                   <FormControl>
                     <input
                       type="text"
@@ -206,7 +206,7 @@ const ApproveUserPopup: React.FC<ApproveUserPopupProps> = ({ user, onClose }) =>
               name="userProfit"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-yellow-600">User Profit (%)</FormLabel>
+                  <FormLabel className="text-gray-400">User Profit (%)</FormLabel>
                   <FormControl>
                     <input
                       type="number"
@@ -228,7 +228,7 @@ const ApproveUserPopup: React.FC<ApproveUserPopupProps> = ({ user, onClose }) =>
               name="introducerFee"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-yellow-600">Introducer Fee (%)</FormLabel>
+                  <FormLabel className="text-gray-400">Introducer Fee (%)</FormLabel>
                   <FormControl>
                     <input
                       type="number"

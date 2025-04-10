@@ -103,40 +103,36 @@ const WaitingListComp: React.FC = () => {
             <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Phone</th>
             <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Country</th>
             <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Email</th>
-            <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Group</th>
-            <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Admin Fee</th>
-            <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Introducer Fee</th>
+            <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">MetaMask Add</th>
             <th className="p-3 text-left max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">Action</th>
           </tr>
         </thead>
         <tbody>
           {pendingUsers.map((user) => (
             <tr key={user.id} className="border-b border-gray-700 hover:bg-gray-800">
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.firstname}</td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.lastname}</td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.phone}</td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.country}</td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.email}</td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.groupId || "-"}</td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.adminFee != null ? user.adminFee : "-"}</td>
-              <td className="p-3 text-white max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.introducerFee != null ? user.introducerFee : "-"}</td>
+              <td className="p-3 text-gray-200 max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.firstname}</td>
+              <td className="p-3 text-gray-200 max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.lastname}</td>
+              <td className="p-3 text-gray-200 max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.phone}</td>
+              <td className="p-3 text-gray-200 max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.country}</td>
+              <td className="p-3 text-gray-200 max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.email}</td>
+              <td className="p-3 text-gray-200 max-w-[15ch] overflow-hidden whitespace-nowrap text-ellipsis">{user.metamask}</td>
               <td className="p-3">
-  <div className="flex space-x-2">
+              <div className="flex space-x-2">
     <button
-      onClick={() => openApprovePopup(user)}
-      className="flex items-center px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+        onClick={() => openApprovePopup(user)}
+        className="p-2 text-green-500 rounded-full transition-colors duration-200"
+        aria-label="Approve"
     >
-      <FaCheckCircle className="h-5 w-5 mr-2" />
-      <span className="hidden sm:inline">Approve</span>
+        <FaCheckCircle className="h-6 w-6" />
     </button>
     <button
-      onClick={() => handleReject(user.id)}
-      className="flex items-center px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+        onClick={() => handleReject(user.id)}
+        className="p-2 text-red-500 rounded-full transition-colors duration-200"
+        aria-label="Reject"
     >
-      <FaTimesCircle className="h-5 w-5 mr-2" />
-      <span className="hidden sm:inline">Reject</span>
+        <FaTimesCircle className="h-6 w-6" />
     </button>
-  </div>
+</div>
 </td>
             </tr>
           ))}

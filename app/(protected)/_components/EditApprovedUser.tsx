@@ -93,12 +93,12 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-gray-900 p-6 rounded-md w-full max-w-4xl max-h-[80vh] overflow-y-auto">
-        <h2 className="text-xl text-white font-bold mb-4">
+        <h2 className="text-xl text-gray-400 font-bold mb-4">
           Edit User: {user.firstname} ({user.email})
         </h2>
         <Form {...form}>
           <form className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid text-gray-400 grid-cols-2 gap-4">
               {/* First Name */}
               <FormField
                 control={form.control}
@@ -107,7 +107,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                   <FormItem>
                     <FormLabel>First Name</FormLabel>
                     <FormControl>
-                      <input {...field} className="bg-gray-800 text-white w-full p-2 rounded" />
+                      <input {...field} className="bg-gray-800 text-gray-200 w-full p-2 rounded" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -121,7 +121,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                   <FormItem>
                     <FormLabel>Last Name</FormLabel>
                     <FormControl>
-                      <input {...field} className="bg-gray-800 text-white w-full p-2 rounded" />
+                      <input {...field} className="bg-gray-800 text-gray-200 w-full p-2 rounded" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -135,7 +135,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                   <FormItem>
                     <FormLabel>Phone</FormLabel>
                     <FormControl>
-                      <input {...field} className="bg-gray-800 text-white w-full p-2 rounded" />
+                      <input {...field} className="bg-gray-800 text-gray-200 w-full p-2 rounded" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -149,7 +149,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                   <FormItem>
                     <FormLabel>Country</FormLabel>
                     <FormControl>
-                      <input {...field} className="bg-gray-800 text-white w-full p-2 rounded" />
+                      <input {...field} className="bg-gray-800 text-gray-200 w-full p-2 rounded" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -163,7 +163,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                   <FormItem>
                     <FormLabel>Metamask</FormLabel>
                     <FormControl>
-                      <input {...field} className="bg-gray-800 text-white w-full p-2 rounded" />
+                      <input {...field} className="bg-gray-800 text-gray-200 w-full p-2 rounded" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -177,7 +177,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                   <FormItem>
                     <FormLabel>AutoTrade</FormLabel>
                     <FormControl>
-                      <input {...field} className="bg-gray-800 text-white w-full p-2 rounded" />
+                      <input {...field} className="bg-gray-800 text-gray-200 w-full p-2 rounded" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -191,7 +191,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <input {...field} type="email" className="bg-gray-800 text-white w-full p-2 rounded" />
+                      <input {...field} type="email" className="bg-gray-800 text-gray-200 w-full p-2 rounded" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -209,7 +209,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                       onChange={field.onChange}
                       onBlur={field.onBlur}
                     />
-                    <FormLabel className="text-white">Approved</FormLabel>
+                    <FormLabel className="text-gray-200">Approved</FormLabel>
                   </FormItem>
                 )}
               />
@@ -225,7 +225,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                       onChange={field.onChange}
                       onBlur={field.onBlur}
                     />
-                    <FormLabel className="text-white">Whitelisted</FormLabel>
+                    <FormLabel className="text-gray-200">Whitelisted</FormLabel>
                   </FormItem>
                 )}
               />
@@ -242,7 +242,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                         onChange={(e) => {
                           handleGroupChange(e);
                         }}
-                        className="bg-gray-800 text-white w-full p-2 rounded"
+                        className="bg-gray-800 text-gray-200 w-full p-2 rounded"
                       >
                         <option value="">Select group</option>
                         <option value="1">VIP</option>
@@ -276,7 +276,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                       <input 
                         type="number" 
                         {...field} 
-                        className="bg-gray-800 text-white w-full p-2 rounded" 
+                        className="bg-gray-800 text-gray-200 w-full p-2 rounded" 
                       />
                     </FormControl>
                     <FormMessage />
@@ -295,7 +295,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                       <input 
                         type="text" 
                         {...field} 
-                        className="bg-gray-800 text-white w-full p-2 rounded" 
+                        className="bg-gray-800 text-gray-200 w-full p-2 rounded" 
                       />
                     </FormControl>
                     <FormMessage />
@@ -313,7 +313,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                       <input 
                         type="number" 
                         {...field} 
-                        className="bg-gray-800 text-white w-full p-2 rounded" 
+                        className="bg-gray-800 text-gray-200 w-full p-2 rounded" 
                       />
                     </FormControl>
                     <FormMessage />
@@ -331,7 +331,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                       <input 
                         type="number" 
                         {...field} 
-                        className="bg-gray-800 text-white w-full p-2 rounded" 
+                        className="bg-gray-800 text-gray-200 w-full p-2 rounded" 
                       />
                     </FormControl>
                     <FormMessage />
@@ -349,7 +349,7 @@ const EditApprovedUser: React.FC<EditApprovedUserProps> = ({ user, onClose, muta
                       <input 
                         type="number" 
                         {...field} 
-                        className="bg-gray-800 text-white w-full p-2 rounded" 
+                        className="bg-gray-800 text-gray-200 w-full p-2 rounded" 
                       />
                     </FormControl>
                     <FormMessage />

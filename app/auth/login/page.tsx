@@ -5,18 +5,20 @@ import { LoginForm } from "@/components/auth/login-form";
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen relative text-white">
-      {/* Left side: Fixed logo and title */}
-      <div className="fixed left-0 top-0 h-full w-1/2 flex flex-col items-center justify-center p-8">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          <br /> Amazing Trading
+    <div className="min-h-screen flex flex-col md:flex-row bg-gray-800 text-white">
+      {/* Left side: Logo and Title */}
+      <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-8">
+        <h1 className="text-xl md:text-3xl font-bold mb-4 text-center">
+          Amazing Trading
         </h1>
-        <img src="/logo.png" alt="Logo" width="350" height="60" />
+        <img src="/logo.png" alt="Logo" className="w-28 md:w-56" />
       </div>
 
       {/* Right side: Login form */}
-      <div className="absolute top-20 flex items-center justify-center p-6">
-        <LoginForm />
+      <div className="w-full md:w-1/2 flex items-center justify-center p-6">
+        <div className="w-full max-w-md">
+          <LoginForm />
+        </div>
       </div>
     </div>
   );
