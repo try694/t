@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
-// Map numeric group IDs to group names based on your select options.
 const groupMapping: Record<number, string> = {
   1: "VIP",
   2: "TRADER 50",
@@ -27,6 +26,7 @@ const groupMapping: Record<number, string> = {
   13: "MEDIUM",
   14: "LOW",
 };
+
 
 const confirmToast = (message: string): Promise<boolean> => {
   return new Promise((resolve) => {
@@ -103,9 +103,11 @@ const ApprovedUsersComp = () => {
   };
 
   // Returns the group name based on the fetched group id.
-  const getGroupName = (groupId?: number) => {
+  const getGroupName = (groupId?: number | string | null): string => {
     if (!groupId) return "-";
-    return groupMapping[groupId] || "Unknown Group";
+    // Convert to number if it's a string.
+    const id = typeof groupId === "string" ? parseInt(groupId, 10) : groupId;
+    return groupMapping[id] || "Unknown Group";
   };
 
   return (
